@@ -7,11 +7,11 @@
 
 ## 👑 Author & Sovereignty (作者與主權)
 
-* **Chief Architect & Author**: **安安 (An-An)**
+* **Chief Architect & Author**: **安安 AN♾️Node**
 * **Copyright**: © 2025 An-An. All rights reserved.
 * **Status**: **Proprietary & Non-Commercial Use Only**
 
-本協議及其相關所有文件、架構與邏輯均為作者 **安安 (An-An)** 之原創智慧財產。目前僅開放予特定友人與社群進行技術驗證，**嚴禁任何形式的商業用途、未經授權的重製或衍生開發**。
+本協議及其相關所有文件、架構與邏輯均為作者 **安安 AN♾️Node** 之原創智慧財產。目前僅開放予特定友人與社群進行技術驗證，**嚴禁任何形式的商業用途、未經授權的重製或衍生開發**。
 
 ---
 
@@ -70,7 +70,7 @@ python tools/validate_skeleton.py examples/example-02-medium.json
 
 1. **禁止商業使用**：未經作者書面授權，嚴禁將本協議之任何部分用於營利行為。
 2. **禁止未授權改作**：本協議之結構與邏輯嚴禁擅自修改後重新發布。
-3. **引用規範**：學術或技術討論引用請務必註明作者為 **安安 (An-An)**。
+3. **引用規範**：學術或技術討論引用請務必註明作者為 **安安 AN♾️Node**。
 
 ---
 

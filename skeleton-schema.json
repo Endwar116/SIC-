@@ -1,0 +1,629 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://semantic-infinite-context.org/schemas/skeleton/v1.0.0",
+  "title": "Semantic Skeleton Schema",
+  "description": "可序列化、可版本化、可差分比對的語義骨架結構定義，用於實現無限上下文技術",
+  "type": "object",
+  "required": ["schema_version", "skeleton_version", "created_at", "updated_at", "divisions", "tension_field", "metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "description": "Schema 規範版本，遵循語義版本號",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "const": "1.0.0"
+    },
+    "skeleton_version": {
+      "type": "string",
+      "description": "此骨架實例的版本號，遵循語義版本號",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["1.0.0", "1.2.3", "2.0.0"]
+    },
+    "skeleton_id": {
+      "type": "string",
+      "description": "骨架唯一識別碼，UUID v4 格式",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "parent_version": {
+      "type": ["string", "null"],
+      "description": "父版本號，用於版本追蹤和差分比對，首版為 null",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "default": null
+    },
+    "created_at": {
+      "type": "string",
+      "description": "創建時間，ISO 8601 格式",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "最後修改時間，ISO 8601 格式",
+      "format": "date-time"
+    },
+    "title": {
+      "type": "string",
+      "description": "骨架標題/任務名稱",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "description": "骨架描述/任務目標",
+      "maxLength": 2000,
+      "default": ""
+    },
+    "divisions": {
+      "type": "array",
+      "description": "部門列表（宏觀骨架層）",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/Division"
+      }
+    },
+    "tension_field": {
+      "$ref": "#/definitions/TensionField",
+      "description": "語義張力場"
+    },
+    "global_hooks": {
+      "type": "array",
+      "description": "全局鉤子列表（跨部門的語義錨點）",
+      "items": {
+        "$ref": "#/definitions/SemanticHookVector"
+      },
+      "default": []
+    },
+    "metadata": {
+      "$ref": "#/definitions/Metadata",
+      "description": "元數據"
+    },
+    "changelog": {
+      "type": "array",
+      "description": "版本變更日誌",
+      "items": {
+        "$ref": "#/definitions/ChangelogEntry"
+      },
+      "default": []
+    }
+  },
+  "definitions": {
+    "Division": {
+      "type": "object",
+      "description": "部門（宏觀骨架層）- 對應技術工程書的 Part/Division",
+      "required": ["id", "title", "segments", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "部門識別碼，使用羅馬數字或字母",
+          "pattern": "^[IVXLCDMivxlcdm]+$|^[A-Z]$",
+          "examples": ["I", "II", "III", "IV", "V"]
+        },
+        "title": {
+          "type": "string",
+          "description": "部門標題",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "部門描述",
+          "maxLength": 1000,
+          "default": ""
+        },
+        "order": {
+          "type": "integer",
+          "description": "排序順序",
+          "minimum": 0
+        },
+        "segments": {
+          "type": "array",
+          "description": "段落列表（中觀骨架層）",
+          "items": {
+            "$ref": "#/definitions/Segment"
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "division_hooks": {
+          "type": "array",
+          "description": "部門級鉤子",
+          "items": {
+            "$ref": "#/definitions/SemanticHookVector"
+          },
+          "default": []
+        }
+      }
+    },
+    "Segment": {
+      "type": "object",
+      "description": "段落（中觀骨架層）- 對應技術工程書的 Segment",
+      "required": ["id", "chapter", "blocks", "status"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "段落編號，全局唯一遞增",
+          "minimum": 1
+        },
+        "chapter": {
+          "type": "string",
+          "description": "章節標題",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "chapter_number": {
+          "type": "integer",
+          "description": "章節編號（在部門內）",
+          "minimum": 1
+        },
+        "blocks": {
+          "type": "array",
+          "description": "區塊列表（微觀骨架層）- 8-Block 標準格式",
+          "items": {
+            "$ref": "#/definitions/Block"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "completion_ratio": {
+          "type": "number",
+          "description": "完成比例，0-1 之間",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "word_count": {
+          "type": "integer",
+          "description": "字數統計",
+          "minimum": 0,
+          "default": 0
+        },
+        "segment_hooks": {
+          "type": "array",
+          "description": "段落級鉤子",
+          "items": {
+            "$ref": "#/definitions/SemanticHookVector"
+          },
+          "default": []
+        },
+        "entry_hook": {
+          "description": "入口鉤子（從上一段繼承）",
+          "oneOf": [
+            { "$ref": "#/definitions/SemanticHookVector" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "exit_hook": {
+          "description": "出口鉤子（傳遞給下一段）",
+          "oneOf": [
+            { "$ref": "#/definitions/SemanticHookVector" },
+            { "type": "null" }
+          ],
+          "default": null
+        },
+        "tension_contribution": {
+          "$ref": "#/definitions/TensionSource",
+          "description": "此段對張力場的貢獻"
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "依賴的其他段落 ID",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "default": []
+        },
+        "last_edited_at": {
+          "type": "string",
+          "description": "最後編輯時間",
+          "format": "date-time"
+        }
+      }
+    },
+    "Block": {
+      "type": "object",
+      "description": "區塊（微觀骨架層）- 8-Block 標準格式中的單一區塊",
+      "required": ["type", "status"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "區塊類型，遵循 8-Block 標準",
+          "enum": [
+            "definition",
+            "structure", 
+            "flow",
+            "submodules",
+            "rules",
+            "interface",
+            "limits",
+            "extensions",
+            "custom"
+          ]
+        },
+        "custom_type": {
+          "type": "string",
+          "description": "自定義區塊類型名稱（僅當 type 為 custom 時使用）",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "區塊標題",
+          "maxLength": 100
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "content_summary": {
+          "type": "string",
+          "description": "內容摘要（用於快速定位）",
+          "maxLength": 500,
+          "default": ""
+        },
+        "word_count": {
+          "type": "integer",
+          "description": "字數統計",
+          "minimum": 0,
+          "default": 0
+        },
+        "block_hook": {
+          "description": "區塊級鉤子",
+          "oneOf": [
+            { "$ref": "#/definitions/SemanticHookVector" },
+            { "type": "null" }
+          ],
+          "default": null
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "狀態標記",
+      "enum": ["pending", "in_progress", "complete", "blocked", "deprecated"],
+      "default": "pending"
+    },
+    "SemanticHookVector": {
+      "type": "object",
+      "description": "三位一體語義鉤子向量（語義向量 + 結構指標 + 語氣指紋）",
+      "required": ["hook_id", "created_at", "structural"],
+      "properties": {
+        "hook_id": {
+          "type": "string",
+          "description": "鉤子唯一識別碼",
+          "pattern": "^hook_[0-9a-f]{8}$"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "創建時間",
+          "format": "date-time"
+        },
+        "semantic": {
+          "type": "object",
+          "description": "語義向量組件",
+          "properties": {
+            "embedding": {
+              "type": "array",
+              "description": "語義嵌入向量",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 1
+            },
+            "embedding_model": {
+              "type": "string",
+              "description": "生成嵌入的模型名稱",
+              "examples": ["text-embedding-3-small", "sentence-transformers/all-MiniLM-L6-v2"]
+            },
+            "key_concepts": {
+              "type": "array",
+              "description": "關鍵概念列表",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 10
+            },
+            "summary": {
+              "type": "string",
+              "description": "語義摘要",
+              "maxLength": 300
+            }
+          }
+        },
+        "structural": {
+          "type": "object",
+          "description": "結構指標組件",
+          "required": ["division_id", "segment_id"],
+          "properties": {
+            "division_id": {
+              "type": "string",
+              "description": "所屬部門 ID"
+            },
+            "segment_id": {
+              "type": "integer",
+              "description": "所屬段落 ID"
+            },
+            "chapter": {
+              "type": "string",
+              "description": "章節名稱"
+            },
+            "block_type": {
+              "type": "string",
+              "description": "所屬區塊類型"
+            },
+            "position": {
+              "type": "number",
+              "description": "在段落中的相對位置（0-1）",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "depth": {
+              "type": "integer",
+              "description": "結構深度（division=1, segment=2, block=3）",
+              "minimum": 1,
+              "maximum": 3
+            }
+          }
+        },
+        "tonal": {
+          "type": "object",
+          "description": "語氣指紋組件",
+          "properties": {
+            "formality": {
+              "type": "number",
+              "description": "正式度（0=口語, 1=學術）",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "density": {
+              "type": "number",
+              "description": "資訊密度（0=稀疏, 1=密集）",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "objectivity": {
+              "type": "number",
+              "description": "客觀度（0=主觀, 1=客觀）",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "register": {
+              "type": "string",
+              "description": "語域類型",
+              "enum": [
+                "technical-engineering",
+                "technical-scientific", 
+                "professional-business",
+                "educational",
+                "conversational",
+                "creative"
+              ]
+            },
+            "tone_signature": {
+              "type": "string",
+              "description": "語氣簽名（用於快速比對）",
+              "pattern": "^[A-Z]{3}-\\d{3}$",
+              "examples": ["ENG-095", "SCI-087", "EDU-072"]
+            }
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "description": "三組件一致性信度（0-1）",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 1
+        },
+        "raw_text": {
+          "type": "string",
+          "description": "原始文字片段（可選，用於調試）",
+          "maxLength": 500
+        }
+      }
+    },
+    "TensionField": {
+      "type": "object",
+      "description": "語義張力場",
+      "required": ["sources", "resultant", "last_calculated"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "張力源列表",
+          "items": {
+            "$ref": "#/definitions/TensionSource"
+          }
+        },
+        "resultant": {
+          "type": "object",
+          "description": "合成張力向量",
+          "properties": {
+            "magnitude": {
+              "type": "number",
+              "description": "合成張力強度（0-1）",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "primary_direction": {
+              "type": "string",
+              "description": "主要張力方向（指向最需要處理的段落）"
+            },
+            "secondary_directions": {
+              "type": "array",
+              "description": "次要張力方向列表",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "last_calculated": {
+          "type": "string",
+          "description": "最後計算時間",
+          "format": "date-time"
+        },
+        "decay_model": {
+          "type": "string",
+          "description": "張力衰減模型",
+          "enum": ["none", "linear", "exponential"],
+          "default": "exponential"
+        },
+        "decay_rate": {
+          "type": "number",
+          "description": "衰減率（每小時）",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.1
+        }
+      }
+    },
+    "TensionSource": {
+      "type": "object",
+      "description": "單一張力源",
+      "properties": {
+        "source_segment": {
+          "type": "integer",
+          "description": "張力源段落 ID"
+        },
+        "intensity": {
+          "type": "number",
+          "description": "張力強度（0-1）",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "direction": {
+          "type": "string",
+          "description": "張力方向",
+          "enum": ["forward", "backward", "lateral", "recursive"]
+        },
+        "type": {
+          "type": "string",
+          "description": "張力類型",
+          "enum": ["structural", "conceptual", "task", "dependency", "unresolved_hook"]
+        },
+        "description": {
+          "type": "string",
+          "description": "張力描述",
+          "maxLength": 200
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resolved": {
+          "type": "boolean",
+          "description": "是否已解決",
+          "default": false
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "元數據",
+      "required": ["task_id", "author"],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "description": "任務唯一識別碼"
+        },
+        "author": {
+          "type": "string",
+          "description": "作者/創建者"
+        },
+        "contributors": {
+          "type": "array",
+          "description": "貢獻者列表",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "model_type": {
+          "type": "string",
+          "description": "目標模型類型",
+          "examples": ["gpt-4", "claude-3", "gemini-pro", "universal"]
+        },
+        "model_version": {
+          "type": "string",
+          "description": "模型版本"
+        },
+        "language": {
+          "type": "string",
+          "description": "主要語言",
+          "default": "zh-TW"
+        },
+        "domain": {
+          "type": "string",
+          "description": "領域/專業範疇",
+          "examples": ["semantic-engineering", "technical-documentation", "research"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "標籤列表",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "license": {
+          "type": "string",
+          "description": "授權類型",
+          "default": "proprietary"
+        },
+        "source_documents": {
+          "type": "array",
+          "description": "來源文件列表",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "custom_fields": {
+          "type": "object",
+          "description": "自定義擴展字段",
+          "additionalProperties": true,
+          "default": {}
+        }
+      }
+    },
+    "ChangelogEntry": {
+      "type": "object",
+      "description": "變更日誌條目",
+      "required": ["version", "timestamp", "changes"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "版本號"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "author": {
+          "type": "string",
+          "description": "變更者"
+        },
+        "changes": {
+          "type": "array",
+          "description": "變更列表",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["added", "modified", "deleted", "moved"]
+              },
+              "path": {
+                "type": "string",
+                "description": "變更路徑（如 divisions[0].segments[1]）"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

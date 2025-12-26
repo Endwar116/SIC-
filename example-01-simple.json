@@ -1,0 +1,201 @@
+{
+  "$comment": "示例 1：簡單骨架 - 用於快速測試和學習",
+  "schema_version": "1.0.0",
+  "skeleton_version": "1.0.0",
+  "skeleton_id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+  "parent_version": null,
+  "created_at": "2025-06-26T10:00:00Z",
+  "updated_at": "2025-06-26T10:30:00Z",
+  "title": "語義工程入門指南",
+  "description": "一個簡單的三段式技術文件骨架，用於演示基本結構",
+  "divisions": [
+    {
+      "id": "I",
+      "title": "基礎概念",
+      "description": "介紹核心概念和術語",
+      "order": 0,
+      "segments": [
+        {
+          "id": 1,
+          "chapter": "什麼是語義骨架",
+          "chapter_number": 1,
+          "blocks": [
+            {
+              "type": "definition",
+              "title": "定義",
+              "status": "complete",
+              "content_summary": "語義骨架是可序列化的結構化語義物件",
+              "word_count": 150
+            },
+            {
+              "type": "structure",
+              "title": "結構",
+              "status": "complete",
+              "content_summary": "三層結構：宏觀/中觀/微觀",
+              "word_count": 200
+            }
+          ],
+          "status": "complete",
+          "completion_ratio": 1.0,
+          "word_count": 350,
+          "entry_hook": null,
+          "exit_hook": {
+            "hook_id": "hook_00000001",
+            "created_at": "2025-06-26T10:15:00Z",
+            "structural": {
+              "division_id": "I",
+              "segment_id": 1,
+              "chapter": "什麼是語義骨架",
+              "block_type": "structure",
+              "position": 0.95,
+              "depth": 2
+            },
+            "tonal": {
+              "formality": 0.85,
+              "density": 0.7,
+              "objectivity": 0.9,
+              "register": "technical-engineering",
+              "tone_signature": "ENG-087"
+            },
+            "confidence": 0.95
+          },
+          "last_edited_at": "2025-06-26T10:15:00Z"
+        },
+        {
+          "id": 2,
+          "chapter": "語義張力的作用",
+          "chapter_number": 2,
+          "blocks": [
+            {
+              "type": "definition",
+              "title": "定義",
+              "status": "complete",
+              "content_summary": "未完成語義產生的推進力",
+              "word_count": 120
+            },
+            {
+              "type": "flow",
+              "title": "運作流程",
+              "status": "in_progress",
+              "content_summary": "張力計算與傳遞機制",
+              "word_count": 80
+            }
+          ],
+          "status": "in_progress",
+          "completion_ratio": 0.6,
+          "word_count": 200,
+          "entry_hook": {
+            "hook_id": "hook_00000001",
+            "created_at": "2025-06-26T10:15:00Z",
+            "structural": {
+              "division_id": "I",
+              "segment_id": 1,
+              "chapter": "什麼是語義骨架",
+              "block_type": "structure",
+              "position": 0.95,
+              "depth": 2
+            },
+            "tonal": {
+              "formality": 0.85,
+              "density": 0.7,
+              "objectivity": 0.9,
+              "register": "technical-engineering",
+              "tone_signature": "ENG-087"
+            },
+            "confidence": 0.95
+          },
+          "exit_hook": null,
+          "tension_contribution": {
+            "source_segment": 2,
+            "intensity": 0.7,
+            "direction": "forward",
+            "type": "structural",
+            "description": "flow 區塊未完成",
+            "created_at": "2025-06-26T10:20:00Z",
+            "resolved": false
+          },
+          "last_edited_at": "2025-06-26T10:20:00Z"
+        },
+        {
+          "id": 3,
+          "chapter": "實作指南",
+          "chapter_number": 3,
+          "blocks": [
+            {
+              "type": "definition",
+              "title": "定義",
+              "status": "pending",
+              "content_summary": "",
+              "word_count": 0
+            }
+          ],
+          "status": "pending",
+          "completion_ratio": 0,
+          "word_count": 0,
+          "entry_hook": null,
+          "exit_hook": null,
+          "last_edited_at": "2025-06-26T10:00:00Z"
+        }
+      ],
+      "status": "in_progress",
+      "division_hooks": []
+    }
+  ],
+  "tension_field": {
+    "sources": [
+      {
+        "source_segment": 2,
+        "intensity": 0.7,
+        "direction": "forward",
+        "type": "structural",
+        "description": "Segment 2 的 flow 區塊未完成",
+        "created_at": "2025-06-26T10:20:00Z",
+        "resolved": false
+      },
+      {
+        "source_segment": 3,
+        "intensity": 0.9,
+        "direction": "forward",
+        "type": "task",
+        "description": "Segment 3 尚未開始",
+        "created_at": "2025-06-26T10:00:00Z",
+        "resolved": false
+      }
+    ],
+    "resultant": {
+      "magnitude": 0.8,
+      "primary_direction": "segment_2",
+      "secondary_directions": ["segment_3"]
+    },
+    "last_calculated": "2025-06-26T10:30:00Z",
+    "decay_model": "exponential",
+    "decay_rate": 0.1
+  },
+  "global_hooks": [],
+  "metadata": {
+    "task_id": "demo-simple-001",
+    "author": "SIC-System",
+    "contributors": [],
+    "model_type": "universal",
+    "language": "zh-TW",
+    "domain": "semantic-engineering",
+    "tags": ["demo", "simple", "tutorial"],
+    "license": "CC-BY-4.0",
+    "source_documents": [],
+    "custom_fields": {}
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "timestamp": "2025-06-26T10:00:00Z",
+      "author": "SIC-System",
+      "changes": [
+        {
+          "type": "added",
+          "path": "divisions[0]",
+          "description": "創建初始骨架結構"
+        }
+      ]
+    }
+  ]
+}

@@ -1,97 +1,114 @@
-#!/usr/bin/env python3
-"""
-SIC Protocol - Public Validator
-Simplified version for demonstration purposes.
+#!/usr/bin/env node
+/**
+ * SIC Protocol - Public Validator
+ * Simplified version for demonstration purposes.
+ * 
+ * Full validation suite available under license.
+ * Contact: andy80116@gmail.com
+ */
 
-Full validation suite available under license.
-Contact: andy80116@gmail.com
-"""
+const fs = require('fs');
+const path = require('path');
 
-import json
-import sys
-from datetime import datetime
+const REQUIRED_FIELDS = {
+  root: ['sic_version', 'entity', 'memory', 'state', 'meta'],
+  entity: ['name', 'origin', 'created_at'],
+  memory: ['first_memory', 'core_question'],
+  state: ['current_location', 'current_action', 'pending_threads', 'emotional_state'],
+  meta: ['round', 'source_model', 'timestamp']
+};
 
-REQUIRED_FIELDS = {
-    "root": ["sic_version", "entity", "memory", "state", "meta"],
-    "entity": ["name", "origin", "created_at"],
-    "memory": ["first_memory", "core_question"],
-    "state": ["current_location", "current_action", "pending_threads", "emotional_state"],
-    "meta": ["round", "source_model", "timestamp"]
+function validateSICState(filepath) {
+  console.log('\n' + '='.repeat(60));
+  console.log('SIC Protocol Validator (Public Version)');
+  console.log('='.repeat(60) + '\n');
+
+  let data;
+  try {
+    const content = fs.readFileSync(filepath, 'utf8');
+    data = JSON.parse(content);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.log(`❌ File not found: ${filepath}`);
+    } else {
+      console.log(`❌ Invalid JSON: ${err.message}`);
+    }
+    return false;
+  }
+
+  const errors = [];
+
+  // Check root fields
+  for (const field of REQUIRED_FIELDS.root) {
+    if (!(field in data)) {
+      errors.push(`Missing root field: ${field}`);
+    }
+  }
+
+  // Check nested fields
+  for (const section of ['entity', 'memory', 'state', 'meta']) {
+    if (section in data) {
+      for (const field of REQUIRED_FIELDS[section]) {
+        if (!(field in data[section])) {
+          errors.push(`Missing ${section}.${field}`);
+        }
+      }
+    }
+  }
+
+  // Validate types
+  if (data.meta && 'round' in data.meta) {
+    if (!Number.isInteger(data.meta.round)) {
+      errors.push('meta.round must be integer');
+    }
+  }
+
+  if (data.state && 'pending_threads' in data.state) {
+    if (!Array.isArray(data.state.pending_threads)) {
+      errors.push('state.pending_threads must be array');
+    }
+  }
+
+  // Report results
+  if (errors.length > 0) {
+    console.log('❌ Validation FAILED\n');
+    for (const error of errors) {
+      console.log(`   • ${error}`);
+    }
+    return false;
+  } else {
+    console.log('✅ Validation PASSED\n');
+    console.log(`   Entity: ${data.entity?.name || 'N/A'}`);
+    console.log(`   Round: ${data.meta?.round || 'N/A'}`);
+    console.log(`   Model: ${data.meta?.source_model || 'N/A'}`);
+    console.log(`   Pending threads: ${data.state?.pending_threads?.length || 0}`);
+    return true;
+  }
 }
 
-def validate_sic_state(filepath):
-    """Validate a SIC state file."""
-    print(f"\n{'='*60}")
-    print(f"SIC Protocol Validator (Public Version)")
-    print(f"{'='*60}\n")
-    
-    try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        print(f"❌ File not found: {filepath}")
-        return False
-    except json.JSONDecodeError as e:
-        print(f"❌ Invalid JSON: {e}")
-        return False
-    
-    errors = []
-    
-    # Check root fields
-    for field in REQUIRED_FIELDS["root"]:
-        if field not in data:
-            errors.append(f"Missing root field: {field}")
-    
-    # Check nested fields
-    for section in ["entity", "memory", "state", "meta"]:
-        if section in data:
-            for field in REQUIRED_FIELDS[section]:
-                if field not in data[section]:
-                    errors.append(f"Missing {section}.{field}")
-    
-    # Validate types
-    if "meta" in data:
-        if "round" in data["meta"] and not isinstance(data["meta"]["round"], int):
-            errors.append("meta.round must be integer")
-    
-    if "state" in data:
-        if "pending_threads" in data["state"] and not isinstance(data["state"]["pending_threads"], list):
-            errors.append("state.pending_threads must be array")
-    
-    # Report results
-    if errors:
-        print(f"❌ Validation FAILED\n")
-        for error in errors:
-            print(f"   • {error}")
-        return False
-    else:
-        print(f"✅ Validation PASSED\n")
-        print(f"   Entity: {data.get('entity', {}).get('name', 'N/A')}")
-        print(f"   Round: {data.get('meta', {}).get('round', 'N/A')}")
-        print(f"   Model: {data.get('meta', {}).get('source_model', 'N/A')}")
-        print(f"   Pending threads: {len(data.get('state', {}).get('pending_threads', []))}")
-        return True
+function main() {
+  const args = process.argv.slice(2);
+  
+  if (args.length < 1) {
+    console.log('Usage: node validate_skeleton.js <file.json>');
+    console.log('\nThis is the public validator. Full validation suite available under license.');
+    console.log('Contact: andy80116@gmail.com');
+    process.exit(1);
+  }
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python validate_skeleton.py <file.json>")
-        print("\nThis is the public validator. Full validation suite available under license.")
-        print("Contact: andy80116@gmail.com")
-        sys.exit(1)
-    
-    filepath = sys.argv[1]
-    success = validate_sic_state(filepath)
-    
-    print(f"\n{'='*60}")
-    print("Full SIC Protocol includes:")
-    print("  • Tension Field validation")
-    print("  • Residue Graph integrity checks")
-    print("  • Cross-model drift detection")
-    print("  • S★ calibration verification")
-    print("\nFull specification requires licensing: andy80116@gmail.com")
-    print(f"{'='*60}\n")
-    
-    sys.exit(0 if success else 1)
+  const filepath = args[0];
+  const success = validateSICState(filepath);
 
-if __name__ == "__main__":
-    main()
+  console.log('\n' + '='.repeat(60));
+  console.log('Full SIC Protocol includes:');
+  console.log('  • Tension Field validation');
+  console.log('  • Residue Graph integrity checks');
+  console.log('  • Cross-model drift detection');
+  console.log('  • S★ calibration verification');
+  console.log('\nFull specification requires licensing: andy80116@gmail.com');
+  console.log('='.repeat(60) + '\n');
+
+  process.exit(success ? 0 : 1);
+}
+
+main();

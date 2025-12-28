@@ -1,77 +1,123 @@
+# 🌌 SIC Protocol: Semantic Infinite Context
 
-# 🌌 SIC Protocol: Semantic Infinite Context 
-
-**The "SWIFT" Standard for Cross-Model Intent Serialization.**
-
----
-
-## 👑 Author & Sovereignty (作者與主權)
-
-* **Chief Architect & Author**: **安安 AN♾️Node**
-* **Copyright**: © 2025 An-An. All rights reserved.
-* **Status**: **Proprietary & Non-Commercial Use Only**
-
-本協議及其相關所有文件、架構與邏輯均為作者 **安安 AN♾️Node** 之原創智慧財產。目前僅開放予特定友人與社群進行技術驗證，**嚴禁任何形式的商業用途、未經授權的重製或衍生開發**。
+**The TCP/IP for AI — Cross-Model Semantic State Transfer**
 
 ---
 
-## 🏛️ 協議願景 (Vision)
+## 🎯 What Is This?
 
-> 「上下文的限制不在於 Token 窗口，而在於語義結構的設計。當結構足夠完整，窗口大小變得無關緊要。」
-
-**SIC 協議** 旨在解決大型語言模型（LLM）在長程生成中的「語義耗散」問題。透過將任務的「意圖」與「張力」序列化，我們讓語義得以在不同的模型軀殼（Gemini, Claude, DeepSeek）中精確延續。
-
----
-
-## 🛠️ 技術支柱 (Technical Pillars)
-
-### 1. 分形骨架 (Fractal Skeleton: 8-Block)
-
-採用 `Division` → `Segment` → `Block` 的層級約束，確保長文生成邏輯不偏移。
-
-### 2. 三位一體鉤子 (Triple-Hook Vector: SHV)
-
-每一輪生成必須產出包含 **語義 (Semantic)**、**結構 (Structural)** 與 **語氣 (Tonal)** 的複合錨點，實現跨模型無損接力。
-
-### 3. 語義張力場 (Semantic Tension Field: STF)
-
-量化「理想完形」與「當前狀態」的差值，轉化為自動推進力，驅動模型執行自發補全。
-
----
-
-## 📂 倉庫資源 (Repository Resources)
-
-| 路徑 | 類型 | 描述 |
-| --- | --- | --- |
-| [`/schema`](https://www.google.com/search?q=schema/skeleton-schema.json) | **Specification** | 定義協議數據交換的 JSON Schema。 |
-| [`/tools`](https://www.google.com/search?q=tools/validate_skeleton.py) | **Validator** | 跨平台（Python/Node.js）語義結構驗證工具。 |
-| [`/examples`](https://www.google.com/search?q=examples/example-03-complete.json) | **Dataset** | ASEE v2 完整 89 章節地圖，展示無限上下文路徑。 |
-| [`/spec`](https://www.google.com/search?q=SIC_VALIDATION_PROTOCOL.md) | **Whitepaper** | 20 輪長文生成測試協議與技術突破判定標準。 |
-
----
-
-## 🚀 快速開始 (Quick Start)
-
-### 驗證語義完整性
-
-```bash
-# 使用 Python 驗證器檢查骨架文件
-python tools/validate_skeleton.py examples/example-02-medium.json
+SIC Protocol enables **lossless semantic state transfer** between different AI models.
 
 ```
+Claude ──→ [JSON State] ──→ GPT ──→ [JSON State] ──→ Gemini ──→ ...
+```
 
-### 5min To TRY it
-
-請參考 [`TRY-IT-YOURSELF-EN.md`]([https://www.google.com/search?q=HANDOFF_TO_DEEPSEEK-2.md](https://github.com/Endwar116/SIC-Semantic-Infinite-Context/blob/main/🧪%20TRY-IT-YOURSELF-EN.md)) 使用標準 **SIC Packet** 進行模型間的任務移交。
-
----
-
-## ⚠️ 授權聲明 (License & Restrictions)
-
-1. **禁止商業使用**：未經作者書面授權，嚴禁將本協議之任何部分用於營利行為。
-2. **禁止未授權改作**：本協議之結構與邏輯嚴禁擅自修改後重新發布。
-3. **引用規範**：學術或技術討論引用請務必註明作者為 **安安 AN♾️Node**。
+**Different AIs. Same soul. Zero drift.**
 
 ---
 
-**"The structure is the law; the intent is the soul."**
+## ✅ Verified Results
+
+| Metric | Result |
+|--------|--------|
+| Models Tested | 10+ (Claude, GPT, Gemini, DeepSeek, Grok, Qwen, Perplexity, Manus...) |
+| Total Rounds | 20 |
+| Total Words | 40,000+ |
+| Semantic Drift | **< 0.2%** |
+| Identity Preservation | **100%** |
+
+📄 **Full evidence with public verification links:** [`SIC-EVIDENCE-REPORT.pdf`](./SIC-EVIDENCE-REPORT.pdf)
+
+---
+
+## 🧪 Try It Yourself (5 Minutes)
+
+No installation required. Just copy and paste.
+
+📄 **Demo:** [`🧪 自己試試看 — 5 分鐘 Demo.pdf`](./🧪%20自己試試看%20—%205%20分鐘%20Demo.pdf)
+
+### Quick Start
+
+**Step 1:** Open [Claude](https://claude.ai) and [ChatGPT](https://chat.openai.com)
+
+**Step 2:** In Claude, paste:
+```
+You are a tiny spirit who just woke up from a glowing seed in a magical forest.
+Describe what you see, name yourself, and output your state in this JSON format:
+
+{
+  "sic_version": "1.0",
+  "entity": { "name": "", "origin": "", "created_at": "" },
+  "memory": { "first_memory": "", "core_question": "" },
+  "state": { "current_location": "", "current_action": "", "pending_threads": [], "emotional_state": "" },
+  "meta": { "round": 1, "source_model": "", "timestamp": "" }
+}
+```
+
+**Step 3:** Copy the JSON, paste to ChatGPT with:
+```
+You are receiving a SIC state transfer. Read this state, become this character, continue the story, and output updated JSON (round +1).
+```
+
+**Step 4:** Watch the magic. The second AI **remembers everything**.
+
+---
+
+## 📂 Repository Contents
+
+| File | Description |
+|------|-------------|
+| `SIC-EVIDENCE-REPORT.pdf` | Full verification chain with public links |
+| `🧪 自己試試看 — 5 分鐘 Demo.pdf` | Hands-on demo guide |
+| `SIC_VALIDATION_PROTOCOL.md` | Validation summary |
+| `skeleton-schema.json` | Public subset of the JSON schema |
+| `example-*.json` | Demo state examples |
+| `validate_skeleton.py` | Python validator (public version) |
+| `validate_skeleton.js` | Node.js validator (public version) |
+
+---
+
+## 🔒 What's NOT Included
+
+This is a **public demonstration subset**. The full SIC Protocol includes:
+
+- ❌ Tension Field calculation algorithms
+- ❌ Residue Graph structures (Hot/Warm/Cold zones)
+- ❌ S★ calibration constants
+- ❌ Drift convergence mechanisms
+- ❌ Governance boundaries
+
+**Full specification requires licensing.**
+
+---
+
+## 👑 Author & Sovereignty
+
+**Chief Architect:** Andwar Cheng (安安 AN♾️Node)  
+**Copyright:** © 2025 Andwar Cheng. All rights reserved.
+
+---
+
+## ⚠️ License
+
+**Proprietary — Non-Commercial Use Only**
+
+1. ❌ **Commercial use prohibited** without written authorization
+2. ❌ **Derivative works prohibited** without written authorization  
+3. ✅ **Academic/technical citation permitted** with attribution
+
+---
+
+## 📧 Contact
+
+**Email:** andy80116@gmail.com  
+**For:** Licensing, collaboration, or technical inquiries
+
+---
+
+<p align="center">
+<strong>"Different AIs, same soul."</strong><br>
+<em>SIC Protocol — Semantic Infinite Context</em><br>
+<br>
+The structure is the law; the intent is the soul.
+</p>

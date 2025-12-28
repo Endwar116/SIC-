@@ -60,9 +60,9 @@ python tools/validate_skeleton.py examples/example-02-medium.json
 
 ```
 
-### 執行跨模型冷啟動
+### 5min To TRY it
 
-請參考 [`HANDOFF_TO_DEEPSEEK-2.md`](https://www.google.com/search?q=HANDOFF_TO_DEEPSEEK-2.md) 使用標準 **SIC Packet** 進行模型間的任務移交。
+請參考 [`TRY-IT-YOURSELF-EN.md`]([https://www.google.com/search?q=HANDOFF_TO_DEEPSEEK-2.md](https://github.com/Endwar116/SIC-Semantic-Infinite-Context/blob/main/🧪%20TRY-IT-YOURSELF-EN.md)) 使用標準 **SIC Packet** 進行模型間的任務移交。
 
 ---
 

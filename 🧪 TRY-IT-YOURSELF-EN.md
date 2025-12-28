@@ -50,7 +50,7 @@ Then output your state in this JSON format:
   }
 }
 ```
-```
+
 
 **Wait for the response. Copy the JSON block.**
 

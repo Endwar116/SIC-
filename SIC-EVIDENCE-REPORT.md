@@ -165,7 +165,7 @@ The evidence is public. The chain is verifiable. The drift is measurable.
 ## 8\. Contact
 
 **Author:** Andwar Cheng 鄭安驊  
-**Email:** [andy80116@gmail.com](mailto:andy80116@gmail.com) | [soulhome2222@gmail.com](mailto:soulhome2222@gmail.com)  
+**Email:** [andy80116@gmail.com](mailto:andy80116@gmail.com)  
 **Location:** Kaohsiung, Taiwan
 
 **Co-developed with:** Claude (Anthropic), Gemini (Google), and 8+ other AI models

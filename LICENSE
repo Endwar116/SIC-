@@ -1,0 +1,100 @@
+# SIC-Semantic-Infinite-Context License
+
+## Dual Licensing
+
+This repository contains components under different licenses:
+
+---
+
+## MIT License (Schema, Validators & Examples)
+
+The following components are licensed under the MIT License:
+
+- `skeleton-schema.json`
+- `example-*.json`
+- `validate_skeleton.py`
+- `constitution_layer.py`
+- Documentation files (`.md` files)
+
+```
+MIT License
+
+Copyright (c) 2025 Andwar Cheng (AN♾️Node)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+## Commercial License (Full Engine & Production Features)
+
+The following components require a commercial license:
+
+- Production-grade Semantic Tensor Compression (STC)
+- Optimized ESSF (Empirical Semantic Stability Field)
+- Enterprise-grade CMSR (Cross-Model Semantic Routing)
+- Real-time Graph-T topology analysis
+- Multi-tenant isolation features
+- Advanced non-repudiation with industrial-grade cryptography
+- Compliance reporting and audit trails
+- Priority support and SLA
+
+### Commercial Use Terms
+
+For commercial licensing inquiries, contact:
+
+- **Email:** andy80116@gmail.com
+- **Subject:** "SIC-Semantic-Infinite-Context Commercial License"
+
+Pricing is based on:
+
+- Number of semantic tensor operations per month
+- Deployment model (cloud/on-premise/hybrid)
+- Support level required
+- Enterprise features enabled
+
+---
+
+## Attribution
+
+If you use the MIT-licensed components, please include:
+
+```
+SIC-Semantic-Infinite-Context by Andwar Cheng (AN♾️Node)
+https://github.com/Endwar116/SIC-Semantic-Infinite-Context
+```
+
+---
+
+## Third-Party Acknowledgments
+
+SIC-Semantic-Infinite-Context was developed through cross-model AI collaboration using the SIC Protocol, with contributions from:
+
+- Claude (Anthropic)
+- GPT (OpenAI)
+- Gemini (Google)
+- Grok (xAI)
+- DeepSeek
+- And other AI systems
+
+The human architect and sole copyright holder is **Andwar Cheng (AN♾️Node)**.
+
+---
+
+**"Open standards, commercial implementation."**

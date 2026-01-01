@@ -501,3 +501,19 @@ Our pricing reflects value alignment, not just compute cycles:
 **Ready to stabilize your AI?** Don't just send a purchase order. Send us your vision.
 * **Email:** `andy80116@gmail.com`
 * **Subject:** `[SIC-SIT Strategic Inquiry] - <Your Company/Project>`
+
+
+---
+
+## 🛡️ Security Audit Status
+
+**Current Status:** Ongoing Hardening
+
+This repository is currently undergoing a rigorous security audit. While the core logic is stable, some components are being hardened to meet enterprise-grade security standards. We welcome community feedback and contributions to this process.
+
+## 🏛️ Repository Architecture
+
+This repository is the **Application Layer (L2)** of the SIC-SIT Protocol Stack. It depends on the following lower-level repositories:
+
+- **[SIT-Protocol](https://github.com/Endwar116/SIT-Protocol)** (L1: Security Layer)
+- **[SIC-SIT-Protocol](https://github.com/Endwar116/SIC-SIT-Protocol)** (L0: Specification & Governance Layer)

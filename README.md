@@ -470,3 +470,15 @@ A: 調整 RIL 的 `divergence_threshold` 參數。
 ## ⚠️ License
 
 This project is **PROPRIETARY & CONFIDENTIAL**. See [PROPRIETARY_NOTICE.md](./PROPRIETARY_NOTICE.md) for details.
+
+
+---
+
+## 💎 Commercial & Ecosystem Strategy
+
+* **Flexible Delivery:** API (SaaS) or On-Premise (Binary).
+* **Dynamic Pricing:** From "Stability Insurance" for banks to "Soul Network Grants" (Free) for community builders.
+* **"Ghost" Branding:** No attribution required. We accept all feedback, even public attacks, as "Stress-Test Data".
+* **Vetting:** All licenses require a strategic interview with An-An.
+
+For strategic inquiries, please contact: `andy80116@gmail.com`

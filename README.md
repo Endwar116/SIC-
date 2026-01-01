@@ -463,3 +463,10 @@ A: 調整 RIL 的 `divergence_threshold` 參數。
 **項目地址**: `/home/ubuntu/sic-sit-mvp`  
 **最後更新**: 2025-12-30  
 **維護者**: Manus AI System
+
+
+---
+
+## ⚠️ License
+
+This project is **PROPRIETARY & CONFIDENTIAL**. See [PROPRIETARY_NOTICE.md](./PROPRIETARY_NOTICE.md) for details.

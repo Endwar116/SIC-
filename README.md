@@ -82,9 +82,9 @@ python3 test_sic_sit.py
 ---
 
 ## 📚 文檔
-
 | 文檔 | 說明 |
 | :--- | :--- |
+| **WHITEPAPER.md** | SIC 技術白皮書（對外版本） |
 | **QUICKSTART.md** | 5 分鐘快速上手指南 |
 | **EXECUTION_REPORT.md** | 完整的實作與驗證報告 |
 | **README.md** | 本文件 |
